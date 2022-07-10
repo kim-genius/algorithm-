@@ -3,14 +3,27 @@ function solution(n, arr) {
     max = Number.MIN_SAFE_INTEGER;
 
   for (let x of arr) {
-    let sum = 0,
-      tmp = x;
+    // let sum = 0,
+    //   tmp = x;
 
-    while (tmp) {
-      sum += tmp % 10;
-      tmp = Math.floor(tmp / 10);
+    // while (tmp) {
+    //   sum += tmp % 10;
+    //   tmp = Math.floor(tmp / 10);
+    // }
+
+    let sum = x
+      .toString()
+      .split("")
+      .reduce((a, b) => Number(a) + Number(b), 0);
+
+    if (sum > max) {
+      max = sum;
+      answer = x;
+    } else if (sum === max) {
+      if (x > answer) {
+        answer = x;
+      }
     }
-    console.log(sum);
   }
 
   return answer;
