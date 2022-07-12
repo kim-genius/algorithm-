@@ -1,24 +1,47 @@
-// 테스트는 다 통과했는데 뭐가 틀렸을까
-
 const fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
-let input = fs.readFileSync(filePath).toString().split("\n");
+let input = fs.readFileSync(filePath).toString().trim().split("\r\n");
 
-const n = Number(input[0].split(" ")[0]);
-const k = Number(input[0].split(" ")[1]) - 1;
+const N = Number(input[0].split(" ")[0]);
+const K = Number(input[0].split(" ")[1]);
 
 input.shift();
 
-const arr = input.map((i) => i.split(" "));
-arr.sort((a, b) => a[0] - b[0]);
+const rank = [...Array(N)].fill(1);
 
-let rank = 1;
+for (let i = 0; i < N; i++) {
+  for (let j = i + 1; j < N; j++) {
+    const pi = input[i].split(" ");
+    const pj = input[j].split(" ");
 
-const tarket = Number(arr[k][1] + arr[k][2] + arr[k][3]);
-for (let i = 0; i < n; i++) {
-  if (tarket < Number(arr[i][1] + arr[i][2] + arr[i][3])) {
-    rank += 1;
+    if (Number(pi[1]) > Number(pj[1])) {
+      rank[j]++;
+    } else if (Number(pi[1]) < Number(pj[1])) {
+      rank[i]++;
+    }
+
+    if (Number(pi[1]) === Number(pj[1]) && Number(pi[2]) > Number(pj[2])) {
+      rank[j]++;
+    } else if (
+      Number(pi[1]) === Number(pj[1]) &&
+      Number(pi[2]) < Number(pj[2])
+    ) {
+      rank[i]++;
+    }
+
+    if (
+      Number(pi[1]) === Number(pj[1]) &&
+      Number(pi[2]) === Number(pj[2]) &&
+      Number(pi[3]) > Number(pj[3])
+    ) {
+      rank[j]++;
+    } else if (
+      Number(pi[1]) === Number(pj[1]) &&
+      Number(pi[2]) === Number(pj[2]) &&
+      Number(pi[3]) < Number(pj[3])
+    ) {
+      rank[i]++;
+    }
   }
 }
-
-console.log(rank);
+console.log(rank[K - 1]);

@@ -1,7 +1,7 @@
-// 답이 모두맞는데 왜틀림?
+//입력에 좌우 공백이 있어서 틀렸나보다 trim()을 사용하니 통과
 const fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
-let input = fs.readFileSync(filePath).toString().split("\n");
+let input = fs.readFileSync(filePath).toString().trim().split("\n");
 
 const N = Number(input[0].split(" ")[0]);
 
