@@ -8,7 +8,7 @@ function solution(n, k, card) {
       }
     }
   }
-  let a = Array.from(tmp).sort((a, b) => b - a);
+  let a = [...tmp].sort((a, b) => b - a);
   answer = a[k - 1];
   return answer;
 }

@@ -1,12 +1,16 @@
 function solution(s) {
-    let answer, max = Number.MIN_SAFE_INTEGER
+  let answer,
+    max = Number.MIN_SAFE_INTEGER;
 
-    for (let x of s) {
-        if (max < x.length) { max = x.length; answer = x }
+  for (let x of s) {
+    if (max < x.length) {
+      max = x.length;
+      answer = x;
     }
+  }
 
-    return answer
+  return answer;
 }
 
-const str = ['teacher', 'time', 'student', 'good']
+const str = ["teacher", "time", "student", "good"];
 console.log(solution(str));
